@@ -1,0 +1,23 @@
+server:
+  port: 8080
+  address: 0.0.0.0
+
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://118.25.75.77:3306:3306/vis?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&serverTimezone=Asia/Shanghai
+    username: vis
+    password: 1111
+
+
+#百度OCR配置
+bd:
+  config:
+    ocr-app-id: 115931857
+    ocr-api-key: BOO6FZfMEi99JHuODCoMRXqw
+    ocr-secret-key: qn35fWbmx0gc9cG7qdXs6pnLKrdMfAZN
+
+    enhance-app-id: 116094898
+    enhance-api-key: 5g2YQVPEHTyrtHi54wzCWL5g
+    enhance-secret-key: QjVqipr6OYnpI6AlwViAuiPFbWcXR1pP
