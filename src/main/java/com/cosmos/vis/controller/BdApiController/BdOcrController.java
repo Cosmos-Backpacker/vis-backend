@@ -104,15 +104,15 @@ public class BdOcrController {
     }
 
 
-
     /**
      * 医疗识别
+     *
      * @param file 图片
      * @return 结果
      */
     @PostMapping("/MedicalReport")
     public Result medicalReportOcr(@RequestPart(value = "file", required = false) MultipartFile file,
-                                   @RequestParam(required = false) String  imageUrl) {
+                                   @RequestParam(required = false) String imageUrl) {
         if (file != null && !file.isEmpty()) {
             // 处理上传的文件
             String res = medicalReportDetection.medicalReportDetection(file, null);
@@ -132,9 +132,9 @@ public class BdOcrController {
     }
 
 
-
     /**
      * 健康识别
+     *
      * @param file 图片
      * @return 结果
      */
@@ -171,7 +171,7 @@ public class BdOcrController {
                              @RequestBody(required = false) Map<String, String> imageUrl) {
         if (file != null && !file.isEmpty()) {
             // 处理上传的文件
-            String res = formula.formula(file,null);
+            String res = formula.formula(file, null);
             return Result.success("success", res);
         } else if (imageUrl != null && !imageUrl.isEmpty()) {
             // 处理图片链接
@@ -185,11 +185,6 @@ public class BdOcrController {
         } else {
             return Result.error("error ，Either file or URL must be provided");
         }
-
-
-
-
-
 
 
     }

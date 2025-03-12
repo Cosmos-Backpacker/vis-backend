@@ -7,6 +7,7 @@ import com.cosmos.vis.BdUtils.PhotoShiBie.HttpUtil;
 import com.cosmos.vis.service.AuthService;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.net.URLEncoder;
@@ -21,7 +22,7 @@ public class AdvancedGeneral {
     //手动注入一个
     private AuthService authService = new AuthService();
 
-    public String advancedGeneral(@RequestParam(value = "file", required = false) MultipartFile file,
+    public String advancedGeneral(@RequestPart(value = "file", required = false) MultipartFile file,
                                   @RequestParam(value = "url", required = false) String imageUrl) {
         // 请求url
         String url = "https://aip.baidubce.com/rest/2.0/image-classify/v2/advanced_general";
