@@ -139,8 +139,8 @@ public class BdOcrController {
      * @return 结果
      */
     @PostMapping("/healthReport")
-    public Result healthReportOcr(@RequestParam(value = "file", required = false) MultipartFile file,
-                                  @RequestBody(required = false) Map<String, String> imageUrl) {
+    public Result healthReportOcr(@RequestPart(value = "file", required = false) MultipartFile file,
+                                  @RequestParam(required = false) String imageUrl) {
         if (file != null && !file.isEmpty()) {
             // 处理上传的文件
             String res = healthReport.healthReport(file, null);
@@ -149,7 +149,7 @@ public class BdOcrController {
             // 处理图片链接
             try {
                 // 从链接下载图片并处理
-                String res = medicalReportDetection.medicalReportDetection(null, imageUrl.get("url"));
+                String res = medicalReportDetection.medicalReportDetection(null, imageUrl);
                 return Result.success("success", res);
             } catch (Exception e) {
                 return Result.error("error ，Failed to download image from URL");
@@ -167,8 +167,8 @@ public class BdOcrController {
      */
     @Deprecated
     @PostMapping("/Formula")
-    public Result formulaOcr(@RequestParam(value = "file", required = false) MultipartFile file,
-                             @RequestBody(required = false) Map<String, String> imageUrl) {
+    public Result formulaOcr(@RequestPart(value = "file", required = false) MultipartFile file,
+                             @RequestParam(required = false) String imageUrl) {
         if (file != null && !file.isEmpty()) {
             // 处理上传的文件
             String res = formula.formula(file, null);
@@ -177,7 +177,7 @@ public class BdOcrController {
             // 处理图片链接
             try {
                 // 从链接下载图片并处理
-                String res = formula.formula(null, imageUrl.get("url"));
+                String res = formula.formula(null, imageUrl);
                 return Result.success("success", res);
             } catch (Exception e) {
                 return Result.error("error ，Failed to download image from URL");

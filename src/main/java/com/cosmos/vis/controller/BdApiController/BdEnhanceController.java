@@ -18,7 +18,6 @@ public class BdEnhanceController {
     private EnhanceImageClient enhanceImageClient;
 
 
-
     @PostMapping("/selfieAnime")
     public Result selfieAnime(@RequestPart(value = "file", required = false) MultipartFile file,
                               @RequestParam(required = false) String imageUrl) {
@@ -39,7 +38,6 @@ public class BdEnhanceController {
             return Result.error("error ，Either file or URL must be provided");
         }
     }
-
 
 
     @PostMapping("/styleTrans")
@@ -126,18 +124,6 @@ public class BdEnhanceController {
             return Result.error("error ，Either file or URL must be provided");
         }
     }
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 }

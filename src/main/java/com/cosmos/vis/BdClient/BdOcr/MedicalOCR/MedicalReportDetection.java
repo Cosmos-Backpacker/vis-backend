@@ -1,8 +1,6 @@
 package com.cosmos.vis.BdClient.BdOcr.MedicalOCR;
 
 
-
-import com.cosmos.vis.BdUtils.PhotoShiBie.FileUtil;
 import com.cosmos.vis.BdUtils.PhotoShiBie.Base64Util;
 import com.cosmos.vis.BdUtils.PhotoShiBie.HttpUtil;
 import com.cosmos.vis.config.BDConfig;
@@ -21,13 +19,14 @@ import java.net.URLEncoder;
 
 @Service
 @Slf4j
-public class MedicalReportDetection{
+public class MedicalReportDetection {
 
     @Autowired
     private AuthService authService;
 
     @Autowired
     private BDConfig bdConfig;
+
     /**
      * 重要提示代码中所需工具类
      * FileUtil,Base64Util,HttpUtil,GsonUtils请从
@@ -64,8 +63,5 @@ public class MedicalReportDetection{
         }
         return null;
     }
-
-
-
 
 }

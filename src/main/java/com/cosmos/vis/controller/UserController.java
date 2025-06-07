@@ -5,6 +5,8 @@ import com.cosmos.vis.common.ErrorCode;
 import com.cosmos.vis.pojo.Result;
 import com.cosmos.vis.pojo.User;
 import com.cosmos.vis.service.IUserService;
+import com.cosmos.vis.utils.MailUtil;
+import jakarta.mail.MessagingException;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,14 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-/**
- * <p>
- * 前端控制器
- * </p>
- *
- * @author CosmosBackpacker
- * @since 2025-03-10
- */
+
 @RestController
 @RequestMapping("/user")
 @Slf4j
@@ -27,6 +22,10 @@ public class UserController {
 
     @Autowired
     private IUserService userService;
+
+
+    @Autowired
+    private MailUtil mailUtil;
 
 
     @PostMapping("/login")
@@ -38,7 +37,6 @@ public class UserController {
 
     @PostMapping("/register")
     public Result register(String account, String password, String checkPassword) {
-
         return userService.userRegister(account, password, checkPassword);
 
     }
@@ -75,12 +73,29 @@ public class UserController {
         if (user == null) {
             throw new RuntimeException("参数为空");
         }
-        log.error(user.toString());
+
+        long userId = userService.getUserId(request);
         if (userService.updateUser(user, request)) {
-            return Result.success("修改成功");
+            //根据实际需求前端更新完成之后需要重新获取更新后的对象
+            User newUser = userService.getById(userId);
+
+            return Result.success("修改成功", newUser);
         } else {
             return Result.error("修改失败");
         }
     }
+
+
+    @PostMapping("/feedBack")
+    public Result feedBack(HttpServletRequest request, String content) throws MessagingException {
+
+        long userId = userService.getUserId(request);
+
+        mailUtil.sendTextMailMessage("3317194303@qq.com", "来自用户" + userId + "反馈信息", content);
+
+        return Result.success("反馈成功");
+
+    }
+
 
 }

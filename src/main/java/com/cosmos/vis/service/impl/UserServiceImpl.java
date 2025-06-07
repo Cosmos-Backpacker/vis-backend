@@ -54,7 +54,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         }
 
         if (account.length() < 4) {
-            throw new BusinessException(ErrorCode.PARAMS_ERROR, "不能为空");
+            throw new BusinessException(ErrorCode.PARAMS_ERROR, "账号不能小于4位");
         }
 
         if (password.length() < 6 || checkPassword.length() < 6) {
@@ -201,7 +201,16 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
 
 
         int result = mapper.update(user, wrapper);
+        if (result <= 0) {
+            throw new BusinessException(ErrorCode.PARAMS_ERROR, "更新失败");
+        }
+        //重新存放缓存
 
+        User newUser = this.getById(userId);
+        if (newUser == null) {
+            throw new BusinessException(ErrorCode.PARAMS_ERROR, "更新失败");
+        }
+        request.getSession().setAttribute(USER_LOGIN_STATE, this.getSafetyUser(newUser));
         return true;
     }
 
