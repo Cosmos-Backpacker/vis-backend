@@ -1,7 +1,9 @@
 package com.cosmos.vis.service;
 
 
+import com.cosmos.vis.config.BDConfig;
 import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.BufferedReader;
@@ -18,30 +20,19 @@ import java.util.Map;
 @Service
 public class AuthService {
 
-    /**
-     * 获取权限token
-     *
-     * @return 返回示例：
-     * {
-     * "access_token": "24.460da4889caad24cccdb1fea17221975.2592000.1491995545.282335-1234567",
-     * "expires_in": 2592000
-     * }
-     */
+    @Autowired
+    private BDConfig bdConfig;
+
     public String getImageVisAuth() {
+
+
         // 官网获取的 API Key 更新为你注册的
-        String clientId = "pjdTQlFwQZbMSBPZM02o2kUt";
+        String clientId = bdConfig.getClientId();
         // 官网获取的 Secret Key 更新为你注册的
-        String clientSecret = "e2DMtQNz33qF9GXkFtxDnbMHhlB4FR95";
+        String clientSecret = bdConfig.getClientSecret();
         return getAccessToken(clientId, clientSecret);
     }
 
-    public String getImageEnhanceVisAuth() {
-        // 官网获取的 API Key 更新为你注册的
-        String clientId = "5g2YQVPEHTyrtHi54wzCWL5g";
-        // 官网获取的 Secret Key 更新为你注册的
-        String clientSecret = "QjVqipr6OYnpI6AlwViAuiPFbWcXR1pP";
-        return getAccessToken(clientId, clientSecret);
-    }
 
     /**
      * 获取API访问token

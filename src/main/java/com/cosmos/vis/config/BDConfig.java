@@ -26,6 +26,13 @@ public class BDConfig {
     private String enhanceApiKey;
 
 
+    private String understandApiKey;
+
+    private String understandSecretKey;
+
+    private String clientId;
+    private String clientSecret;
+
 
 
 }
